@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-
   VALID_INTEGER_REGEX = /\A[0-9]+\z/.freeze
 
   with_options presence: true do
@@ -10,7 +9,7 @@ class Item < ApplicationRecord
     validates :shipping_fee_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :state_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :days_to_ship_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :price, numericality: { less_than_or_equal_to: 9999999, greater_than_or_equal_to: 300 }
+    validates :price, numericality: { less_than_or_equal_to: 9_999_999, greater_than_or_equal_to: 300 }
     validates :image
   end
 
@@ -23,5 +22,4 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee
   belongs_to :days_to_ship
   belongs_to :state
-
 end
