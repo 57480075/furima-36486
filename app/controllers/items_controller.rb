@@ -20,11 +20,40 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
   end
-end
 
-private
+  def edit
+    @item = Item.find(params[:id])
+    if user_signed_in?
+      unless user_signed_in? && current_user.id == @item.user_id
+        redirect_to root_path
+      end
+    else
+      redirect_to new_user_session_path
+    end
+  end
 
-def item_params
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render :edit
+    end
+  end
+
+  # def destroy
+  #   @item = Item.find(params[:id])
+  #   if @item.destroy
+  #     redirect_to root_path
+  #   else
+  #     render :show
+  #   end
+  # end
+
+  private
+
+  def item_params
   params.require(:item).permit(:image, :description, :name, :references, :category_id, :condition_id, :shipping_fee_id, :state_id,
                                 :days_to_ship_id, :price).merge(user_id: current_user.id)
+  end
 end
