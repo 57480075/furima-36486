@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
 
 
   before_action :get_item, only: [:show, :edit]
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: [:show, :index, :update]
 
   def index
     @items = Item.all.order(created_at: :desc)
@@ -26,15 +26,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless user_signed_in? && current_user.id == @item.user_id
+    unless current_user.id == @item.user_id
       redirect_to root_path
-    else
-      redirect_to new_user_session_path
     end
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path
     else
