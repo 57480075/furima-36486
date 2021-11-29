@@ -15,7 +15,7 @@
 
 ### Association
 
-- has_many :products
+- has_many :items
 - has_many :purchases
 
 
@@ -54,7 +54,7 @@
 
 ### Association
 
-- belongs_to :product
+- belongs_to :item
 - has_one :shipping_address
 - belongs_to :user
 
