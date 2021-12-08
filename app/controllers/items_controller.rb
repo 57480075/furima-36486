@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id && @item.user_id == @item.purchase.item_id
+    if current_user.id |= @item.user_id || @purchase_shipping_address
       redirect_to root_path
     end
   end
