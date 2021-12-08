@@ -135,7 +135,6 @@
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
 
-          <%# 商品が売れていればsold outを表示しましょう %>
 
         <% if item.purchase.present? %>
           <div class='sold-out'>
@@ -145,7 +144,6 @@
 
 
 
-          <%# //商品が売れていればsold outを表示しましょう %>
 
         </div>
         <div class='item-info'>
