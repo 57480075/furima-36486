@@ -40,6 +40,11 @@ RSpec.describe PurchaseShippingAddress, type: :model do
         @purchase_shipping_address.valid?
         expect(@purchase_shipping_address.errors.full_messages).to include("Zip code is invalid. Include hyphen(-)")
       end
+      it "state_id(都道府県)に「---」が選択されている場合は登録できない" do
+        @purchase_shipping_address.state_id = 0
+        @purchase_shipping_address.valid?
+        expect(@purchase_shipping_address.errors.full_messages).to include("State can't be blank")
+      end
       it "cityが空では登録できない" do
         @purchase_shipping_address.city = nil
         @purchase_shipping_address.valid?
