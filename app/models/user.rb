@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります' }
 
+  has_many :items
+  has_many :purchases
+
+
   with_options presence: true do
     validates :name
     validates :last_name, format: { with: VALID_NAME_REGEX, message: 'は漢字,カタカナ,ひらがなを含む必要があります' }
